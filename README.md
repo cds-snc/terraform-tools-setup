@@ -8,7 +8,7 @@ It currently download the following tool version, although each can be overriden
 |---|---|---|
 |[conftest](https://github.com/open-policy-agent/conftest)|0.30.0|CONFTEST_VERSION|
 |[terraform](https://github.com/hashicorp/terraform)|1.1.7|TERRAFORM_VERSION|
-|[terragrut](https://github.com/gruntwork-io/terragrunt)|0.36.3|TERRAGRUNT_VERSION|
+|[terragrunt](https://github.com/gruntwork-io/terragrunt)|0.36.3|TERRAGRUNT_VERSION|
 
 ## Using the action
 
