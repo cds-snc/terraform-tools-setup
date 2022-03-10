@@ -1,6 +1,7 @@
 #!/bin/bash
 
 TEST_DIR="./test_dir"
+RUNNER_TEMP="./"
 
 # Removing existing test_bin
 rm -rf ${TEST_DIR}
@@ -12,7 +13,7 @@ TERRAGRUNT_VERSION="${TERRAGRUNT_VERSION:-0.36.3}"
 
 # Call script
 mkdir ${TEST_DIR}
-BIN_DIR=${TEST_DIR} ./get_tools.sh
+BIN_DIR=${TEST_DIR} RUNNER_TEMP=${RUNNER_TEMP} ./get_tools.sh
 
 # Test conftest
 OUTPUT=$(${TEST_DIR}/conftest --version)
