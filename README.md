@@ -1,10 +1,3 @@
-# Generic Project Template
+# Terratools Setup GitHub Action
 
-This repository provides some base files for setting up a repository at
-CDS. Plan is to create more project template for specific technologies:
-
-- project-template-terraform
-- project-template-python
-- project-template-nodejs
-
-Note that default community health files are maintained at https://github.com/cds-snc/.github 
+This repository contains a GitHub action that sets up all the tooling required for running Terraform in CDS CI/CD flows.

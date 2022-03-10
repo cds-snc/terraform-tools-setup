@@ -1,0 +1,6 @@
+checksums*
+conftest*
+SHA256SUMS
+terraform*
+terragrunt*
+test_dir*
