@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e # Exit with nonzero exit code if anything fails
 
-BIN_DIR="${BIN_DIR:-\/usr\/local\/bin}"
+BIN_DIR="${BIN_DIR:-/usr/local/bin}"
 
 # Set versions
 
