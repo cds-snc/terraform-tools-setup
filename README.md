@@ -21,7 +21,7 @@ jobs:
   my_ci_flow:
     runs-on: ubuntu-latest
     steps:
-      - id: setup terraform tools
+      - name: setup terraform tools
         uses: cds-snc/terraform-tools-setup@v1
         env: # In case you want to override default versions
             CONFTEST_VERSION: 0.30.0 
