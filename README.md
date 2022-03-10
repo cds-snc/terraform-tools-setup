@@ -1,4 +1,4 @@
-# Terratools Setup GitHub Action
+# Terraform tools Setup GitHub Action
 
 This repository contains a GitHub action that sets up all the tooling required for running Terraform in CDS CI/CD flows.
 
@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - id: setup terratools
-        uses: cds-snc/terratools-setup@v1
+        uses: cds-snc/terraform-tools-setup@v1
         env: # In case you want to override default versions
             CONFTEST_VERSION: 0.30.0 
             TERRAFORM_VERSION: 1.1.7
