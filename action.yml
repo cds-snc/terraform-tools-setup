@@ -1,0 +1,7 @@
+name: Terratools setup
+description: This repository contains a GitHub action that sets up all the tooling required for running Terraform in CDS CI/CD flows.
+runs:
+  using: "composite"
+  steps:
+    - run: $GITHUB_ACTION_PATH/get_tools.sh
+      shell: bash
