@@ -16,7 +16,7 @@ BIN_DIR=${TEST_DIR} ./get_tools.sh
 
 # Test conftest
 OUTPUT=$(${TEST_DIR}/conftest --version)
-EXPECTED="Version: 0.30.0"
+EXPECTED="Version: ${CONFTEST_VERSION}"
 
 if [ "${OUTPUT}" != "${EXPECTED}" ]; then
   echo "Test conftest failed"
@@ -25,7 +25,7 @@ fi
 
 # Test terraform
 OUTPUT=$(${TEST_DIR}/terraform --version)
-EXPECTED="Terraform v1.1.7
+EXPECTED="Terraform v${TERRAFORM_VERSION}
 on linux_amd64"
 
 if [ "${OUTPUT}" != "${EXPECTED}" ]; then
@@ -35,7 +35,7 @@ fi
 
 # Test terragrunt
 OUTPUT=$(${TEST_DIR}/terragrunt --version)
-EXPECTED="terragrunt version v0.36.3"
+EXPECTED="terragrunt version v${TERRAGRUNT_VERSION}"
 
 if [ "${OUTPUT}" != "${EXPECTED}" ]; then
   echo "Test terragrunt failed"
