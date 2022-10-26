@@ -1,5 +1,22 @@
 #!/bin/bash
 
+function test {
+  local PROGRAM=$1
+  local OUTPUT=$2
+  local EXPECTED=$3
+
+  echo "Testing $PROGRAM"
+  echo "Output: $OUTPUT"
+  echo "Expected: $EXPECTED"
+
+  if [ "$OUTPUT" == "$EXPECTED" ]; then
+    echo "PASS: $PROGRAM"
+  else
+    echo "FAIL: $PROGRAM"
+    exit 1
+  fi
+}
+
 TEST_DIR="./test_dir"
 RUNNER_TEMP="./"
 
@@ -8,7 +25,7 @@ rm -rf ${TEST_DIR}
 
 # Set versions
 CONFTEST_VERSION="${CONFTEST_VERSION:-0.30.0}"
-TERRAFORM_VERSION="${TERRAFORM_VERSION:-1.1.7}"
+TERRAFORM_VERSION="${TERRAFORM_VERSION:-1.3.3}"
 TERRAGRUNT_VERSION="${TERRAGRUNT_VERSION:-0.36.3}"
 TF_SUMMARIZE_VERSION="${TF_SUMMARIZE_VERSION:-0.2.3}"
 
@@ -16,39 +33,10 @@ TF_SUMMARIZE_VERSION="${TF_SUMMARIZE_VERSION:-0.2.3}"
 mkdir ${TEST_DIR}
 BIN_DIR=${TEST_DIR} RUNNER_TEMP=${RUNNER_TEMP} ./get_tools.sh
 
-# Test conftest
-OUTPUT=$(${TEST_DIR}/conftest --version)
-EXPECTED="Version: ${CONFTEST_VERSION}"
-
-if [ "${OUTPUT}" != "${EXPECTED}" ]; then
-  echo "Test conftest failed"
-  exit 1
-fi
-
-# Test terraform
-OUTPUT=$(${TEST_DIR}/terraform --version)
-EXPECTED="Terraform v${TERRAFORM_VERSION}
+test "conftest" "$(${TEST_DIR}/conftest --version)" "Version: ${CONFTEST_VERSION}"
+test "terraform" "$(${TEST_DIR}/terraform --version)" "Terraform v${TERRAFORM_VERSION}
 on linux_amd64"
+test "terragrunt" "$(${TEST_DIR}/terragrunt --version)" "terragrunt version v${TERRAGRUNT_VERSION}"
+test "tf-summarize" "$(${TEST_DIR}/tf-summarize -v)" "Version: ${TF_SUMMARIZE_VERSION}"
 
-if [ "${OUTPUT}" != "${EXPECTED}" ]; then
-  echo "Test terraform failed"
-  exit 1
-fi
-
-# Test terragrunt
-OUTPUT=$(${TEST_DIR}/terragrunt --version)
-EXPECTED="terragrunt version v${TERRAGRUNT_VERSION}"
-
-if [ "${OUTPUT}" != "${EXPECTED}" ]; then
-  echo "Test terragrunt failed"
-  exit 1
-fi
-
-# Test tf-summarize
-OUTPUT=$(${TEST_DIR}/tf-summarize -v)
-EXPECTED="Version: ${TF_SUMMARIZE_VERSION}"
-if [ "${OUTPUT}" != "${EXPECTED}" ]; then
-  echo "Test tf-summarize failed"
-  exit 1
-fi
 echo "All tests passed!"
