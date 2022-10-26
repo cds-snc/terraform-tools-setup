@@ -10,6 +10,7 @@ rm -rf ${TEST_DIR}
 CONFTEST_VERSION="${CONFTEST_VERSION:-0.30.0}"
 TERRAFORM_VERSION="${TERRAFORM_VERSION:-1.1.7}"
 TERRAGRUNT_VERSION="${TERRAGRUNT_VERSION:-0.36.3}"
+TF_SUMMARIZE_VERSION="${TF_SUMMARIZE_VERSION:-0.2.3}"
 
 # Call script
 mkdir ${TEST_DIR}
@@ -43,4 +44,11 @@ if [ "${OUTPUT}" != "${EXPECTED}" ]; then
   exit 1
 fi
 
+# Test tf-summarize
+OUTPUT=$(${TEST_DIR}/tf-summarize -v)
+EXPECTED="Version: ${TF_SUMMARIZE_VERSION}"
+if [ "${OUTPUT}" != "${EXPECTED}" ]; then
+  echo "Test tf-summarize failed"
+  exit 1
+fi
 echo "All tests passed!"
