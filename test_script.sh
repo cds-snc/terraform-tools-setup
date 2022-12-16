@@ -33,7 +33,7 @@ TF_SUMMARIZE_VERSION="${TF_SUMMARIZE_VERSION:-0.2.3}"
 mkdir ${TEST_DIR}
 BIN_DIR=${TEST_DIR} RUNNER_TEMP=${RUNNER_TEMP} ./get_tools.sh
 
-test "conftest" "$(${TEST_DIR}/conftest --version | head -n 1)" "Version: ${CONFTEST_VERSION}"
+test "conftest" "$(${TEST_DIR}/conftest --version | head -n 1)" "Conftest: ${CONFTEST_VERSION}"
 test "terraform" "$(${TEST_DIR}/terraform --version)" "Terraform v${TERRAFORM_VERSION}
 on linux_amd64"
 test "terragrunt" "$(${TEST_DIR}/terragrunt --version)" "terragrunt version v${TERRAGRUNT_VERSION}"
