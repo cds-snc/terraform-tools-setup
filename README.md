@@ -1,52 +1,45 @@
-# Conftest
+# Terraform tools Setup GitHub Action
 
-[![Go Report Card](https://goreportcard.com/badge/open-policy-agent/opa)](https://goreportcard.com/report/open-policy-agent/conftest) [![Netlify](https://api.netlify.com/api/v1/badges/2d928746-3380-4123-b0eb-1fd74ba390db/deploy-status)](https://app.netlify.com/sites/vibrant-villani-65041c/deploys)
+This repository contains a GitHub action that sets up all the tooling required for running Terraform in CDS CI/CD flows.
 
-Conftest helps you write tests against structured configuration data. Using Conftest you can
-write tests for your Kubernetes configuration, Tekton pipeline definitions, Terraform code,
-Serverless configs or any other config files.
+It currently download the following tool version, although each can be overriden with an environment variable:
 
-Conftest uses the Rego language from [Open Policy Agent](https://www.openpolicyagent.org/) for writing
-the assertions. You can read more about Rego in [How do I write policies](https://www.openpolicyagent.org/docs/how-do-i-write-policies.html)
-in the Open Policy Agent documentation.
+|Tool|Version|ENV name|
+|---|---|---|
+|[conftest](https://github.com/open-policy-agent/conftest)|0.36.0|CONFTEST_VERSION|
+|[terraform](https://github.com/hashicorp/terraform)|1.3.6|TERRAFORM_VERSION|
+|[terragrunt](https://github.com/gruntwork-io/terragrunt)|0.42.5|TERRAGRUNT_VERSION|
+|[TF Summarize](https://github.com/dineshba/tf-summarize)|0.2.3|TF_SUMMARIZE_VERSION|
 
-Here's a quick example. Save the following as `policy/deployment.rego`:
+## Using the action
 
-```rego
-package main
+To use the action you can invoke it in the following way:
 
-deny[msg] {
-  input.kind == "Deployment"
-  not input.spec.template.spec.securityContext.runAsNonRoot
+```
+on: [push]
 
-  msg := "Containers must not run as root"
-}
-
-deny[msg] {
-  input.kind == "Deployment"
-  not input.spec.selector.matchLabels.app
-
-  msg := "Containers must provide app label for pod selectors"
-}
+jobs:
+  my_ci_flow:
+    runs-on: ubuntu-latest
+    steps:
+      - name: setup terraform tools
+        uses: cds-snc/terraform-tools-setup@v1
+        env: # In case you want to override default versions
+            CONFTEST_VERSION: 0.30.0 
+            TERRAFORM_VERSION: 1.1.7
+            TERRAGRUNT_VERSION: 0.36.3
+            TF_SUMMARIZE_VERSION: 0.2.3
 ```
 
-Assuming you have a Kubernetes deployment in `deployment.yaml` you can run Conftest like so:
+## Updating versions and testing
 
-```console
-$ conftest test deployment.yaml
-FAIL - deployment.yaml - Containers must not run as root
-FAIL - deployment.yaml - Containers must provide app label for pod selectors
+To test the script you can run `./test_script.sh`. 
 
-2 tests, 0 passed, 0 warnings, 2 failures, 0 exceptions
+If you would like to update the default versions, you need to update the following lines in both `get_tools.sh` and `test_script.sh`
+
 ```
-
-Conftest isn't specific to Kubernetes. It will happily let you write tests for any configuration files in a variety of different formats. See the [documentation](https://www.conftest.dev/) for [installation instructions](https://www.conftest.dev/install/) and
-more details about the features.
-
-## Want to contribute to Conftest?
-
-* See [DEVELOPMENT.md](DEVELOPMENT.md) to build and test Conftest itself.
-* See [CONTRIBUTING.md](CONTRIBUTING.md) to get started.
-
-For discussions and questions join us on the [Open Policy Agent Slack](https://slack.openpolicyagent.org/)
-in the `#opa-conftest` channel.
+CONFTEST_VERSION="${CONFTEST_VERSION:-0.30.0}"
+TERRAFORM_VERSION="${TERRAFORM_VERSION:-1.1.7}"
+TERRAGRUNT_VERSION="${TERRAGRUNT_VERSION:-0.36.3}"
+TF_SUMMARIZE_VERSION="${TF_SUMMARIZE_VERSION:-0.2.3}"
+```
