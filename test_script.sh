@@ -24,16 +24,16 @@ RUNNER_TEMP="./"
 rm -rf ${TEST_DIR}
 
 # Set versions
-CONFTEST_VERSION="${CONFTEST_VERSION:-0.30.0}"
-TERRAFORM_VERSION="${TERRAFORM_VERSION:-1.3.3}"
-TERRAGRUNT_VERSION="${TERRAGRUNT_VERSION:-0.36.3}"
+CONFTEST_VERSION="${CONFTEST_VERSION:-0.36.0}"
+TERRAFORM_VERSION="${TERRAFORM_VERSION:-1.3.6}"
+TERRAGRUNT_VERSION="${TERRAGRUNT_VERSION:-0.42.5}"
 TF_SUMMARIZE_VERSION="${TF_SUMMARIZE_VERSION:-0.2.3}"
 
 # Call script
 mkdir ${TEST_DIR}
 BIN_DIR=${TEST_DIR} RUNNER_TEMP=${RUNNER_TEMP} ./get_tools.sh
 
-test "conftest" "$(${TEST_DIR}/conftest --version)" "Version: ${CONFTEST_VERSION}"
+test "conftest" "$(${TEST_DIR}/conftest --version | head -n 1)" "Conftest: ${CONFTEST_VERSION}"
 test "terraform" "$(${TEST_DIR}/terraform --version)" "Terraform v${TERRAFORM_VERSION}
 on linux_amd64"
 test "terragrunt" "$(${TEST_DIR}/terragrunt --version)" "terragrunt version v${TERRAGRUNT_VERSION}"

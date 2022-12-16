@@ -6,9 +6,10 @@ It currently download the following tool version, although each can be overriden
 
 |Tool|Version|ENV name|
 |---|---|---|
-|[conftest](https://github.com/open-policy-agent/conftest)|0.30.0|CONFTEST_VERSION|
-|[terraform](https://github.com/hashicorp/terraform)|1.1.7|TERRAFORM_VERSION|
-|[terragrunt](https://github.com/gruntwork-io/terragrunt)|0.36.3|TERRAGRUNT_VERSION|
+|[conftest](https://github.com/open-policy-agent/conftest)|0.36.0|CONFTEST_VERSION|
+|[terraform](https://github.com/hashicorp/terraform)|1.3.6|TERRAFORM_VERSION|
+|[terragrunt](https://github.com/gruntwork-io/terragrunt)|0.42.5|TERRAGRUNT_VERSION|
+|[TF Summarize](https://github.com/dineshba/tf-summarize)|0.2.3|TF_SUMMARIZE_VERSION|
 
 ## Using the action
 
@@ -27,6 +28,7 @@ jobs:
             CONFTEST_VERSION: 0.30.0 
             TERRAFORM_VERSION: 1.1.7
             TERRAGRUNT_VERSION: 0.36.3
+            TF_SUMMARIZE_VERSION: 0.2.3
 ```
 
 ## Updating versions and testing
@@ -39,4 +41,5 @@ If you would like to update the default versions, you need to update the followi
 CONFTEST_VERSION="${CONFTEST_VERSION:-0.30.0}"
 TERRAFORM_VERSION="${TERRAFORM_VERSION:-1.1.7}"
 TERRAGRUNT_VERSION="${TERRAGRUNT_VERSION:-0.36.3}"
+TF_SUMMARIZE_VERSION="${TF_SUMMARIZE_VERSION:-0.2.3}"
 ```
