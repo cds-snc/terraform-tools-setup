@@ -36,7 +36,7 @@ To test the script you can run `./test_script.sh`.
 If you would like to update the default versions, you need to update the following lines in both `get_tools.sh` and `test_script.sh`
 
 ```
-CONFTEST_VERSION="${CONFTEST_VERSION:-0.30.0}"
-TERRAFORM_VERSION="${TERRAFORM_VERSION:-1.1.7}"
-TERRAGRUNT_VERSION="${TERRAGRUNT_VERSION:-0.36.3}"
+CONFTEST_VERSION="${CONFTEST_VERSION:-0.36.0}"
+TERRAFORM_VERSION="${TERRAFORM_VERSION:-1.3.6}"
+TERRAGRUNT_VERSION="${TERRAGRUNT_VERSION:-0.42.5}"
 ```
