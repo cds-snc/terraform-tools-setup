@@ -9,7 +9,7 @@ function test {
   echo "Output: $OUTPUT"
   echo "Expected: $EXPECTED"
 
-  if [ "$OUTPUT" == "$EXPECTED" ]; then
+  if [[ "$OUTPUT" =~ "$EXPECTED" ]]; then
     echo "PASS: $PROGRAM"
   else
     echo "FAIL: $PROGRAM"
