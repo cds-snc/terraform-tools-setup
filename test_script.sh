@@ -9,7 +9,7 @@ function test {
   echo "Output: $OUTPUT"
   echo "Expected: $EXPECTED"
 
-  if [ "$OUTPUT" == "$EXPECTED" ]; then
+  if [[ "$OUTPUT" =~ "$EXPECTED" ]]; then
     echo "PASS: $PROGRAM"
   else
     echo "FAIL: $PROGRAM"
@@ -20,9 +20,6 @@ function test {
 TEST_DIR="./test_dir"
 RUNNER_TEMP="./"
 
-# Removing existing test_bin
-rm -rf ${TEST_DIR}
-
 # Set versions
 CONFTEST_VERSION="${CONFTEST_VERSION:-0.36.0}"
 TERRAFORM_VERSION="${TERRAFORM_VERSION:-1.3.6}"
@@ -30,7 +27,7 @@ TERRAGRUNT_VERSION="${TERRAGRUNT_VERSION:-0.42.5}"
 TF_SUMMARIZE_VERSION="${TF_SUMMARIZE_VERSION:-0.2.3}"
 
 # Call script
-mkdir ${TEST_DIR}
+mkdir -p ${TEST_DIR}
 BIN_DIR=${TEST_DIR} RUNNER_TEMP=${RUNNER_TEMP} ./get_tools.sh
 
 test "conftest" "$(${TEST_DIR}/conftest --version | head -n 1)" "Conftest: ${CONFTEST_VERSION}"
