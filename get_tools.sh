@@ -10,6 +10,7 @@ CONFTEST_VERSION="${CONFTEST_VERSION:-0.36.0}"
 TERRAFORM_VERSION="${TERRAFORM_VERSION:-1.3.6}"
 TERRAGRUNT_VERSION="${TERRAGRUNT_VERSION:-0.42.5}"
 TF_SUMMARIZE_VERSION="${TF_SUMMARIZE_VERSION:-0.2.3}"
+TRUFFLEHOG_VERSION="${TRUFFLEHOG_VERSION:-3.90.12}"
 
 cd "${RUNNER_TEMP}"
 
@@ -59,3 +60,15 @@ chmod +x tf-summarize
 mv tf-summarize "${BIN_DIR}"
 rm "tf-summarize_linux_amd64.zip" "tf-summarize_SHA256SUMS"
 echo "Done downloading tf-summarize ${TF_SUMMARIZE_VERSION}"
+
+# Get trufflehog
+
+echo "Getting trufflehog ${TRUFFLEHOG_VERSION} ..."
+wget "https://github.com/trufflesecurity/trufflehog/releases/download/v${TRUFFLEHOG_VERSION}/trufflehog_${TRUFFLEHOG_VERSION}_linux_amd64.tar.gz"
+wget "https://github.com/trufflesecurity/trufflehog/releases/download/v${TRUFFLEHOG_VERSION}/trufflehog_${TRUFFLEHOG_VERSION}_checksums.txt"
+grep 'linux_amd64.tar.gz' < "trufflehog_${TRUFFLEHOG_VERSION}_checksums.txt" | sha256sum --check  --status
+tar -zxvf "trufflehog_${TRUFFLEHOG_VERSION}_linux_amd64.tar.gz" trufflehog
+chmod +x trufflehog
+mv trufflehog "${BIN_DIR}"
+rm "trufflehog_${TRUFFLEHOG_VERSION}_linux_amd64.tar.gz" "trufflehog_${TRUFFLEHOG_VERSION}_checksums.txt"
+echo "Done downloading trufflehog ${TRUFFLEHOG_VERSION}"

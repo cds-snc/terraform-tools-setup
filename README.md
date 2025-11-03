@@ -10,6 +10,7 @@ It currently download the following tool version, although each can be overriden
 |[terraform](https://github.com/hashicorp/terraform)|1.3.6|TERRAFORM_VERSION|
 |[terragrunt](https://github.com/gruntwork-io/terragrunt)|0.42.5|TERRAGRUNT_VERSION|
 |[TF Summarize](https://github.com/dineshba/tf-summarize)|0.2.3|TF_SUMMARIZE_VERSION|
+|[TruffleHog](https://github.com/trufflesecurity/trufflehog)|3.90.12|TRUFFLEHOG_VERSION|
 
 ## Using the action
 
@@ -42,4 +43,5 @@ CONFTEST_VERSION="${CONFTEST_VERSION:-0.30.0}"
 TERRAFORM_VERSION="${TERRAFORM_VERSION:-1.1.7}"
 TERRAGRUNT_VERSION="${TERRAGRUNT_VERSION:-0.36.3}"
 TF_SUMMARIZE_VERSION="${TF_SUMMARIZE_VERSION:-0.2.3}"
+TRUFFLEHOG_VERSION="${TRUFFLEHOG_VERSION:-3.90.12}"
 ```
