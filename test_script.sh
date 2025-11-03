@@ -25,9 +25,10 @@ rm -rf ${TEST_DIR}
 
 # Set versions
 CONFTEST_VERSION="${CONFTEST_VERSION:-0.36.0}"
-TERRAFORM_VERSION="${TERRAFORM_VERSION:-1.3.6}"
+TERRAFORM_VERSION="${TERRAFORM_VERSION:-1.13.4}"
 TERRAGRUNT_VERSION="${TERRAGRUNT_VERSION:-0.42.5}"
 TF_SUMMARIZE_VERSION="${TF_SUMMARIZE_VERSION:-0.2.3}"
+TRUFFLEHOG_VERSION="${TRUFFLEHOG_VERSION:-3.90.12}"
 
 # Call script
 mkdir ${TEST_DIR}
@@ -38,5 +39,6 @@ test "terraform" "$(${TEST_DIR}/terraform --version)" "Terraform v${TERRAFORM_VE
 on linux_amd64"
 test "terragrunt" "$(${TEST_DIR}/terragrunt --version)" "terragrunt version v${TERRAGRUNT_VERSION}"
 test "tf-summarize" "$(${TEST_DIR}/tf-summarize -v)" "Version: ${TF_SUMMARIZE_VERSION}"
+test "trufflehog" "$(${TEST_DIR}/trufflehog --version)" "trufflehog ${TRUFFLEHOG_VERSION}"
 
 echo "All tests passed!"
