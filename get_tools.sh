@@ -19,7 +19,7 @@ cd "${RUNNER_TEMP}"
 echo "Getting conftest ${CONFTEST_VERSION} ..."
 wget "https://github.com/open-policy-agent/conftest/releases/download/v${CONFTEST_VERSION}/conftest_${CONFTEST_VERSION}_Linux_x86_64.tar.gz"
 wget "https://github.com/open-policy-agent/conftest/releases/download/v${CONFTEST_VERSION}/checksums.txt"
-grep "^conftest_${CONFTEST_VERSION}_Linux_x86_64.tar.gz$" < checksums.txt | sha256sum --check  --status
+grep "conftest_${CONFTEST_VERSION}_Linux_x86_64.tar.gz$" < checksums.txt | sha256sum --check  --status
 tar -zxvf "conftest_${CONFTEST_VERSION}_Linux_x86_64.tar.gz" conftest
 chmod +x conftest
 mv conftest "${BIN_DIR}"
@@ -31,7 +31,7 @@ echo "Done downloading conftest ${CONFTEST_VERSION}"
 echo "Getting terraform ${TERRAFORM_VERSION} ..."
 wget "https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip"
 wget "https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_SHA256SUMS"
-grep "^terraform_${TERRAFORM_VERSION}_linux_amd64.zip$" < "terraform_${TERRAFORM_VERSION}_SHA256SUMS" | sha256sum --check  --status
+grep "terraform_${TERRAFORM_VERSION}_linux_amd64.zip$" < "terraform_${TERRAFORM_VERSION}_SHA256SUMS" | sha256sum --check  --status
 unzip "terraform_${TERRAFORM_VERSION}_linux_amd64.zip" terraform
 chmod +x terraform
 mv terraform "${BIN_DIR}"
@@ -43,7 +43,7 @@ echo "Done downloading terraform ${TERRAFORM_VERSION}"
 echo "Getting terragrunt ${TERRAGRUNT_VERSION} ..."
 wget "https://github.com/gruntwork-io/terragrunt/releases/download/v${TERRAGRUNT_VERSION}/terragrunt_linux_amd64"
 wget "https://github.com/gruntwork-io/terragrunt/releases/download/v${TERRAGRUNT_VERSION}/SHA256SUMS"
-grep "^terragrunt_linux_amd64$" < SHA256SUMS | sha256sum --check  --status
+grep "terragrunt_linux_amd64$" < SHA256SUMS | sha256sum --check  --status
 mv "terragrunt_linux_amd64" terragrunt
 chmod +x terragrunt
 mv terragrunt "${BIN_DIR}"
@@ -54,7 +54,7 @@ echo "Done downloading terragrunt ${TERRAGRUNT_VERSION}"
 echo "Getting tf-summarize ${TF_SUMMARIZE_VERSION} ..."
 wget "https://github.com/dineshba/tf-summarize/releases/download/v${TF_SUMMARIZE_VERSION}/tf-summarize_linux_amd64.zip"
 wget "https://github.com/dineshba/tf-summarize/releases/download/v${TF_SUMMARIZE_VERSION}/tf-summarize_SHA256SUMS"
-grep "^tf-summarize_linux_amd64.zip$" < tf-summarize_SHA256SUMS | sha256sum --check  --status
+grep "tf-summarize_linux_amd64.zip$" < tf-summarize_SHA256SUMS | sha256sum --check  --status
 unzip "tf-summarize_linux_amd64.zip" tf-summarize
 chmod +x tf-summarize
 mv tf-summarize "${BIN_DIR}"
@@ -66,7 +66,7 @@ echo "Done downloading tf-summarize ${TF_SUMMARIZE_VERSION}"
 echo "Getting trufflehog ${TRUFFLEHOG_VERSION} ..."
 wget "https://github.com/trufflesecurity/trufflehog/releases/download/v${TRUFFLEHOG_VERSION}/trufflehog_${TRUFFLEHOG_VERSION}_linux_amd64.tar.gz"
 wget "https://github.com/trufflesecurity/trufflehog/releases/download/v${TRUFFLEHOG_VERSION}/trufflehog_${TRUFFLEHOG_VERSION}_checksums.txt"
-grep "^trufflehog_${TRUFFLEHOG_VERSION}_linux_amd64.tar.gz$" < "trufflehog_${TRUFFLEHOG_VERSION}_checksums.txt" | sha256sum --check  --status
+grep "trufflehog_${TRUFFLEHOG_VERSION}_linux_amd64.tar.gz$" < "trufflehog_${TRUFFLEHOG_VERSION}_checksums.txt" | sha256sum --check  --status
 tar -zxvf "trufflehog_${TRUFFLEHOG_VERSION}_linux_amd64.tar.gz" trufflehog
 chmod +x trufflehog
 mv trufflehog "${BIN_DIR}"
