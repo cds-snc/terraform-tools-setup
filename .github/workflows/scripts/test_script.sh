@@ -19,8 +19,7 @@ function test_version {
 }
 
 test_version "conftest" "$(conftest --version | head -n 1)" "Conftest: ${CONFTEST_VERSION}"
-test_version "terraform" "$(terraform --version)" "Terraform v${TERRAFORM_VERSION}
-on linux_amd64"
+test_version "terraform" "$(terraform --version -json | jq -r .terraform_version)" "${TERRAFORM_VERSION}"
 test_version "terragrunt" "$(terragrunt --version)" "terragrunt version v${TERRAGRUNT_VERSION}"
 test_version "tf-summarize" "$(tf-summarize -v)" "Version: ${TF_SUMMARIZE_VERSION}"
 test_version "trufflehog" "$(trufflehog --version)" "trufflehog ${TRUFFLEHOG_VERSION}"
