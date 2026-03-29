@@ -1,7 +1,49 @@
 name: Terratools setup
 description: This repository contains a GitHub action that sets up all the tooling required for running Terraform in CDS CI/CD flows.
+inputs:
+  conftest_version:
+    description: Version of conftest to install. If not provided, conftest will not be installed.
+    required: false
+  conftest_checksum:
+    description: SHA256 checksum of the conftest archive. If not provided, the published checksum file will be downloaded and used.
+    required: false
+  terraform_version:
+    description: Version of terraform to install. If not provided, terraform will not be installed.
+    required: false
+  terraform_checksum:
+    description: SHA256 checksum of the terraform archive. If not provided, the published checksum file will be downloaded and used.
+    required: false
+  terragrunt_version:
+    description: Version of terragrunt to install. If not provided, terragrunt will not be installed.
+    required: false
+  terragrunt_checksum:
+    description: SHA256 checksum of the terragrunt binary. If not provided, the published checksum file will be downloaded and used.
+    required: false
+  tf_summarize_version:
+    description: Version of tf-summarize to install. If not provided, tf-summarize will not be installed.
+    required: false
+  tf_summarize_checksum:
+    description: SHA256 checksum of the tf-summarize archive. If not provided, the published checksum file will be downloaded and used.
+    required: false
+  trufflehog_version:
+    description: Version of trufflehog to install. If not provided, trufflehog will not be installed.
+    required: false
+  trufflehog_checksum:
+    description: SHA256 checksum of the trufflehog archive. If not provided, the published checksum file will be downloaded and used.
+    required: false
 runs:
   using: "composite"
   steps:
     - run: $GITHUB_ACTION_PATH/get_tools.sh
       shell: bash
+      env:
+        CONFTEST_VERSION: ${{ inputs.conftest_version }}
+        CONFTEST_CHECKSUM: ${{ inputs.conftest_checksum }}
+        TERRAFORM_VERSION: ${{ inputs.terraform_version }}
+        TERRAFORM_CHECKSUM: ${{ inputs.terraform_checksum }}
+        TERRAGRUNT_VERSION: ${{ inputs.terragrunt_version }}
+        TERRAGRUNT_CHECKSUM: ${{ inputs.terragrunt_checksum }}
+        TF_SUMMARIZE_VERSION: ${{ inputs.tf_summarize_version }}
+        TF_SUMMARIZE_CHECKSUM: ${{ inputs.tf_summarize_checksum }}
+        TRUFFLEHOG_VERSION: ${{ inputs.trufflehog_version }}
+        TRUFFLEHOG_CHECKSUM: ${{ inputs.trufflehog_checksum }}

@@ -7,7 +7,21 @@ jobs:
   CI:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@ee0669bd1cc54295c223e0bb666b733df41de1c5 # v2.7.0
-    - name: Test Script
-      run: |
-        ./test_script.sh
+    - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+    - name: Setup tools
+      uses: ./
+      with:
+        conftest_version: "0.36.0"
+        conftest_checksum: "d98783276c4fd47c779a1ece4c0decba9ee6462687839d25389882a468c362cc"
+        terraform_version: "1.14.3"
+        terraform_checksum: "178b2a602251bb68b94732aceca2cc1023d87597cb83dba92cab31b6689edb4d"
+        terragrunt_version: "0.98.0"
+        terragrunt_checksum: "68a9e029b438957c4164e505dfade123c67d6c3c3e11880bcadf3f2b33a8d865"
+        tf_summarize_version: "0.2.3"
+        tf_summarize_checksum: "c3dd0b0361e66914236c40d51960c45756564c351f42505720ea7682e917acca"
+        trufflehog_version: "3.90.12"
+        trufflehog_checksum: "318fd1e8af68b54f4465437208582003a5948293ea401c5c67bb55f17e4e2102"
+
+    - name: Test installed versions
+      run: .github/workflows/scripts/test_script.sh
