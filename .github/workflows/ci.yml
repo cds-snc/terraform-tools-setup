@@ -7,8 +7,8 @@ on:
 env:
   TF_SUMMARIZE_VERSION: "0.2.3"
   TF_SUMMARIZE_CHECKSUM: "c3dd0b0361e66914236c40d51960c45756564c351f42505720ea7682e917acca"
-  CONFTST_VERSION: "0.36.0"
-  CONFTST_CHECKSUM: "d98783276c4fd47c779a1ece4c0decba9ee6462687839d25389882a468c362cc"
+  CONFTEST_VERSION: "0.36.0"
+  CONFTEST_CHECKSUM: "d98783276c4fd47c779a1ece4c0decba9ee6462687839d25389882a468c362cc"
   TERRAFORM_VERSION: "1.14.3"
   TERRAFORM_CHECKSUM: "178b2a602251bb68b94732aceca2cc1023d87597cb83dba92cab31b6689edb4d"
   TERRAGRUNT_VERSION: "0.98.0"
@@ -25,8 +25,8 @@ jobs:
     - name: Setup tools
       uses: ./
       with:
-        conftest_version: ${{ env.CONFTST_VERSION }}
-        conftest_checksum: ${{ env.CONFTST_CHECKSUM }}
+        conftest_version: ${{ env.CONFTEST_VERSION }}
+        conftest_checksum: ${{ env.CONFTEST_CHECKSUM }}
         terraform_version: ${{ env.TERRAFORM_VERSION }}
         terraform_checksum: ${{ env.TERRAFORM_CHECKSUM }}
         terragrunt_version: ${{ env.TERRAGRUNT_VERSION }}
