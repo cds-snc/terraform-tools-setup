@@ -1,0 +1,44 @@
+#!/bin/bash
+
+function test {
+  local PROGRAM=$1
+  local OUTPUT=$2
+  local EXPECTED=$3
+
+  echo "Testing $PROGRAM"
+  echo "Output: $OUTPUT"
+  echo "Expected: $EXPECTED"
+
+  if [ "$OUTPUT" == "$EXPECTED" ]; then
+    echo "PASS: $PROGRAM"
+  else
+    echo "FAIL: $PROGRAM"
+    exit 1
+  fi
+}
+
+TEST_DIR="./test_dir"
+RUNNER_TEMP="./"
+
+# Removing existing test_bin
+rm -rf ${TEST_DIR}
+
+# Set versions
+CONFTEST_VERSION="${CONFTEST_VERSION:-0.36.0}"
+TERRAFORM_VERSION="${TERRAFORM_VERSION:-1.14.3}"
+TERRAGRUNT_VERSION="${TERRAGRUNT_VERSION:-0.98.0}"
+TF_SUMMARIZE_VERSION="${TF_SUMMARIZE_VERSION:-0.2.3}"
+TRUFFLEHOG_VERSION="${TRUFFLEHOG_VERSION:-3.90.12}"
+
+# Call script
+mkdir ${TEST_DIR}
+BIN_DIR=${TEST_DIR} RUNNER_TEMP=${RUNNER_TEMP} ./get_tools.sh
+
+test "conftest" "$(${TEST_DIR}/conftest --version | head -n 1)" "Conftest: ${CONFTEST_VERSION}"
+test "terraform" "$(${TEST_DIR}/terraform --version)" "Terraform v${TERRAFORM_VERSION}
+on linux_amd64"
+test "terragrunt" "$(${TEST_DIR}/terragrunt --version)" "terragrunt version v${TERRAGRUNT_VERSION}"
+test "tf-summarize" "$(${TEST_DIR}/tf-summarize -v)" "Version: ${TF_SUMMARIZE_VERSION}"
+test "trufflehog" "$(${TEST_DIR}/trufflehog --version)" "trufflehog ${TRUFFLEHOG_VERSION}"
+
+echo "All tests passed!"

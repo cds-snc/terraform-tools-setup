@@ -1,40 +1,13 @@
 name: CI
-
 on:
   workflow_dispatch:
   pull_request:
-
-env:
-  TF_SUMMARIZE_VERSION: "0.2.3"
-  TF_SUMMARIZE_CHECKSUM: "c3dd0b0361e66914236c40d51960c45756564c351f42505720ea7682e917acca"
-  CONFTEST_VERSION: "0.36.0"
-  CONFTEST_CHECKSUM: "d98783276c4fd47c779a1ece4c0decba9ee6462687839d25389882a468c362cc"
-  TERRAFORM_VERSION: "1.14.3"
-  TERRAFORM_CHECKSUM: "178b2a602251bb68b94732aceca2cc1023d87597cb83dba92cab31b6689edb4d"
-  TERRAGRUNT_VERSION: "0.98.0"
-  TERRAGRUNT_CHECKSUM: "68a9e029b438957c4164e505dfade123c67d6c3c3e11880bcadf3f2b33a8d865"
-  TRUFFLEHOG_VERSION: "3.90.12"
-  TRUFFLEHOG_CHECKSUM: "318fd1e8af68b54f4465437208582003a5948293ea401c5c67bb55f17e4e2102"
 
 jobs:
   CI:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-
-    - name: Setup tools
-      uses: ./
-      with:
-        conftest_version: ${{ env.CONFTEST_VERSION }}
-        conftest_checksum: ${{ env.CONFTEST_CHECKSUM }}
-        terraform_version: ${{ env.TERRAFORM_VERSION }}
-        terraform_checksum: ${{ env.TERRAFORM_CHECKSUM }}
-        terragrunt_version: ${{ env.TERRAGRUNT_VERSION }}
-        terragrunt_checksum: ${{ env.TERRAGRUNT_CHECKSUM }}
-        tf_summarize_version: ${{ env.TF_SUMMARIZE_VERSION }}
-        tf_summarize_checksum: ${{ env.TF_SUMMARIZE_CHECKSUM }}
-        trufflehog_version: ${{ env.TRUFFLEHOG_VERSION }}
-        trufflehog_checksum: ${{ env.TRUFFLEHOG_CHECKSUM }}
-
-    - name: Test installed versions
-      run: .github/workflows/scripts/test_script.sh
+    - uses: actions/checkout@ee0669bd1cc54295c223e0bb666b733df41de1c5 # v2.7.0
+    - name: Test Script
+      run: |
+        ./test_script.sh
