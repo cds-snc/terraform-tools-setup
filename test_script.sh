@@ -24,19 +24,21 @@ RUNNER_TEMP="./"
 rm -rf ${TEST_DIR}
 
 # Set versions
-CONFTEST_VERSION="${CONFTEST_VERSION:-0.36.0}"
-TERRAFORM_VERSION="${TERRAFORM_VERSION:-1.14.3}"
-TERRAGRUNT_VERSION="${TERRAGRUNT_VERSION:-0.98.0}"
-TF_SUMMARIZE_VERSION="${TF_SUMMARIZE_VERSION:-0.2.3}"
-TRUFFLEHOG_VERSION="${TRUFFLEHOG_VERSION:-3.90.12}"
+export CONFTEST_VERSION="0.36.0"
+export TERRAFORM_VERSION="1.14.3"
+export TERRAGRUNT_VERSION="0.98.0"
+export TF_SUMMARIZE_VERSION="0.2.3"
+export TRUFFLEHOG_VERSION="3.90.12"
+
+# Set a manual checksum
+export TRUFFLEHOG_CHECKSUM="318fd1e8af68b54f4465437208582003a5948293ea401c5c67bb55f17e4e2102"
 
 # Call script
 mkdir ${TEST_DIR}
 BIN_DIR=${TEST_DIR} RUNNER_TEMP=${RUNNER_TEMP} ./get_tools.sh
 
 test "conftest" "$(${TEST_DIR}/conftest --version | head -n 1)" "Conftest: ${CONFTEST_VERSION}"
-test "terraform" "$(${TEST_DIR}/terraform --version)" "Terraform v${TERRAFORM_VERSION}
-on linux_amd64"
+test "terraform" "$(${TEST_DIR}/terraform --version -json | jq -r .terraform_version)" "${TERRAFORM_VERSION}"
 test "terragrunt" "$(${TEST_DIR}/terragrunt --version)" "terragrunt version v${TERRAGRUNT_VERSION}"
 test "tf-summarize" "$(${TEST_DIR}/tf-summarize -v)" "Version: ${TF_SUMMARIZE_VERSION}"
 test "trufflehog" "$(${TEST_DIR}/trufflehog --version)" "trufflehog ${TRUFFLEHOG_VERSION}"
