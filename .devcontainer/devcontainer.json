@@ -1,6 +1,6 @@
 {
 	"name": "terraform-tools-setup",
-	"image": "mcr.microsoft.com/devcontainers/base:bullseye@sha256:03e618ae2b25d068f292c99220b2b055007694d1e1ad7fac34b02d8060a7f504",
+	"image": "mcr.microsoft.com/devcontainers/base:bullseye@sha256:a109759a394d8d154aa0e4d5cb110cbfd313514865d980c9627b2654329ebfe5",
 	"customizations": {
 		"vscode": {
 			"extensions": [
