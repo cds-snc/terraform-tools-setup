@@ -2,5 +2,22 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "local>cds-snc/renovate-config"
+  ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "managerFilePatterns": ["/(^|/)get_tools\\.sh$/"],
+      "matchStrings": [
+        "# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)\\n\\w+_DEFAULT_TAG=\"(?<currentValue>[^\"]+)\"\\n\\w+_DEFAULT_CHECKSUM=\"(?<currentDigest>[a-f0-9]{64})\""
+      ]
+    },
+    {
+      "customType": "regex",
+      "managerFilePatterns": ["/(^|/)get_tools\\.sh$/"],
+      "matchStrings": [
+        "# renovate-version-only: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)\\n\\w+_DEFAULT_VERSION=\"(?<currentValue>[^\"]+)\""
+      ],
+      "extractVersionTemplate": "^v?(?<version>.+)$"
+    }
   ]
 }
